@@ -1,0 +1,95 @@
+﻿<Window x:Class="MineSweeper.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DinoSweeper"
+        Height="600" Width="800"
+        Icon="/Assets/logo.png"
+        WindowStartupLocation="CenterScreen"
+        Background="#7B3F00">
+
+    <Grid>
+        <!-- Row 0: Menu -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu bar -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_Game">
+                <MenuItem Header="New Game" Click="NewGame_Click"/>
+                <MenuItem Header="Settings" Click="Settings_Click"/>
+                <Separator/>
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Main content area -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- Game board -->
+                <ColumnDefinition Width="Auto" />
+                <!-- Right side panel -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Game board -->
+            <Grid Name="GameBoard"
+                  Background="#7B3F00"
+                  Grid.Column="0"
+                  Margin="0"/>
+
+            <!-- Right side panel -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="12,0,0,0">
+
+                <!-- Mines counter box -->
+                <Border Background="#222" CornerRadius="6" Padding="10" MinWidth="130" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Mines" Foreground="White" FontSize="11" Opacity="0.85" HorizontalAlignment="Center"/>
+                        <TextBlock Name="MineCounter" Text="10" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Timer box -->
+                <Border Background="#222" CornerRadius="6" Padding="10" MinWidth="130" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Time" Foreground="White" FontSize="11" Opacity="0.85" HorizontalAlignment="Center"/>
+                        <TextBlock Name="TimerDisplay" Text="00:00" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Hint header -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+                    <TextBlock Text="Hint"
+                               Foreground="White"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Margin="0,0,6,0"/>
+                    <TextBlock Name="HintCounter"
+                               Text="∞"
+                               Foreground="White"
+                               FontSize="16"
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+                <!-- Hint image clickable -->
+                <Image Name="HintImage"
+                       Source="pack://application:,,,/MineSweeper;component/Assets/lightbulb.png"
+                       Stretch="Uniform"
+                       MaxWidth="100"
+                       MaxHeight="100"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,12"
+                       MouseLeftButtonUp="Hint_Click"
+                       Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

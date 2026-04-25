@@ -1,0 +1,59 @@
+﻿<Window x:Class="MineSweeper.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Width="350"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Height">
+
+    <Window.Resources>
+        <!-- Converter to show/hide Countdown Level -->
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Difficulty -->
+            <RowDefinition Height="Auto"/>
+            <!-- Mode -->
+            <RowDefinition Height="Auto"/>
+            <!-- Countdown Level -->
+            <RowDefinition Height="Auto"/>
+            <!-- Buttons -->
+        </Grid.RowDefinitions>
+
+        <!-- Difficulty Options -->
+        <GroupBox Header="Difficulty" Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <RadioButton Name="BeginnerRadio" Content="Beginner (9x9, 10 mines)" IsChecked="True"/>
+                <RadioButton Name="IntermediateRadio" Content="Intermediate (16x16, 40 mines)"/>
+                <RadioButton Name="ExpertRadio" Content="Expert (30x16, 99 mines)"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Mode Options -->
+        <GroupBox Header="Mode" Grid.Row="1" Margin="0,0,0,10">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <RadioButton Name="NormalModeRadio" Content="Normal (count up)" IsChecked="True"/>
+                <RadioButton Name="CountdownModeRadio" Content="Countdown"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Countdown Levels -->
+        <GroupBox Header="Countdown Level" Grid.Row="2" Margin="0,0,0,10"
+                  Visibility="{Binding ElementName=CountdownModeRadio, Path=IsChecked,
+                               Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <RadioButton Name="CountdownBeginnerRadio" Content="Beginner (300s)" IsChecked="True"/>
+                <RadioButton Name="CountdownIntermediateRadio" Content="Intermediate (180s)"/>
+                <RadioButton Name="CountdownExpertRadio" Content="Expert (60s)"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Action Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Apply" Width="80" Margin="5" Click="Apply_Click"/>
+            <Button Content="Cancel" Width="80" Margin="5" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
